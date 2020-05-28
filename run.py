@@ -1,5 +1,8 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup as b
+import os
+import shutil
+
 
 minimum = 0
 maximum = 10
@@ -69,18 +72,37 @@ for i in range(0, number_of_sites):
                 item = item.replace("<dd class=\"_9c44d_znb10\">", "")
                 item = item.replace("</dd>", "")
                 dane20.append(item)
-            print(nazwa)
-            print(cena)
-            if cena_z_dostawa:
-                print(cena_z_dostawa)
-            if licytacja:
-                print("LICYTACJA")
-            if ile_osob_kupilo:
-                print(ile_osob_kupilo)
-            if AllegroSMART:
-                print("Allegro SMART")
-            if ssprzedawca:
-                print("Super Sprzedawca")
-            for i in range(len(dane10)): print(dane10[i] + ": " + dane20[i])
-            print(link)
-            print("\n")
+            
+            try:
+                os.makedirs("dane")
+                os.chdir("dane")
+                break
+            except FileExistsError:
+                os.chdir("dane")
+                shutil.rmtree(#jesli tu sie da sciezke to powinno dzialac, + nie chce na razie tworzyc plikow nie wiem czemu. bede to robić w nocy dziś, ale mozna rzucić okiem.) 
+                f = open("{}.txt".format(nazwa), "a")
+            #print(nazwa)
+                f.write(nazwa)
+            #print(cena)
+                f.write(cena)
+                if cena_z_dostawa:
+                #print(cena_z_dostawa)
+                    f.write(cena_z_dostawa)
+                if licytacja:
+                    f.write("LICYTACJA")
+                #print("LICYTACJA")
+                if ile_osob_kupilo:
+                    f.write(ile_osob_kupilo)
+                #print(ile_osob_kupilo)
+                if AllegroSMART:
+                    f.write("Allegro SMART")
+                #print("Allegro SMART")
+                if ssprzedawca:
+                #print("Super Sprzedawca")
+                    f.write("Super Sprzedawca")
+                for i in range(len(dane10)): 
+                #print(dane10[i] + ": " + dane20[i])
+                    f.write(dane10[i] + ": " + dane20[i])
+            #print(link)
+                f.write(link)
+            #print("\n")
