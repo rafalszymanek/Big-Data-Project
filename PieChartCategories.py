@@ -43,14 +43,9 @@ labels.append('Inne')
 numbers.append(numOfOthers)
 
 
-print(varData)
-# Pie chart, where the slices will be ordered and plotted counter-clockwise:
-
-# explode = (0, 0.2, 0.1, 0, 0, 0, 0.3, 0.1, 0.2, 0, 0, 0.2, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
-
 fig1, ax1 = plt.subplots()
 patches = ax1.pie(numbers, labels=labels, radius=1, autopct='%1.1f%%', startangle=90)
-ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+ax1.axis('equal')  #
 fig1.suptitle('Porównanie dostępnych kategorii', fontsize=14, fontweight='bold')
 ax1.set_title("Liczba wszystkich produktów: " + str(totalNumber))
 ttl = ax1.title
