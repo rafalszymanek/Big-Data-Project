@@ -119,20 +119,23 @@ for post in soup.findAll("div", {"class":"_9c44d_1V-js"}):
             'stan': stan
         })
 
-        with open('allProductsInCategories.json', 'w+') as outfile:
-            json.dump(data, outfile)
-        # print(nazwa)
-        # print(cena)
-        # if cena_z_dostawa:
-        #     print(cena_z_dostawa)
-        # if licytacja:
-        #     print("LICYTACJA")
-        # if ile_osob_kupilo:
-        #     print(ile_osob_kupilo)
-        # if AllegroSMART:
-        #     print("Allegro SMART")
-        # if ssprzedawca:
-        #     print("Super Sprzedawca")
-        # for i in range(len(dane10)): print(dane10[i] + ": " + dane20[i])
-        # print(link)
-        # print("\n")
+parsed = json.loads(json.dumps(data))
+# print(type(data))
+# print(json.dumps(parsed, indent=4, sort_keys=True))
+with open('allProductsInCategories.json', 'w+') as outfile:
+    json.dump(parsed, outfile, indent=4, sort_keys=True)
+# print(nazwa)
+# print(cena)
+# if cena_z_dostawa:
+#     print(cena_z_dostawa)
+# if licytacja:
+#     print("LICYTACJA")
+# if ile_osob_kupilo:
+#     print(ile_osob_kupilo)
+# if AllegroSMART:
+#     print("Allegro SMART")
+# if ssprzedawca:
+#     print("Super Sprzedawca")
+# for i in range(len(dane10)): print(dane10[i] + ": " + dane20[i])
+# print(link)
+# print("\n")
