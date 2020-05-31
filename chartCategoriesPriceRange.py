@@ -1,5 +1,7 @@
 import json
-import statistics 
+import statistics
+from matplotlib import pyplot as plt
+import numpy as np
 
 data = {}
 data["Celowniki, lunety"] = [] 
@@ -43,9 +45,47 @@ for oneCategory in data:
             if y.isdigit():
                 arrPrice.append(y)
         oneCategoryPrices.append(float(''.join(arrPrice))/100)
-    medianArray.append(statistics.median(oneCategoryPrices))
+
+    lowQuantile= np.quantile(oneCategoryPrices, 0.05)
+    highQuantile = np.quantile(oneCategoryPrices, 0.95)
+    afterQuantile = []
+    for price in oneCategoryPrices:
+        if lowQuantile <= price <= highQuantile:
+            afterQuantile.append(price)
+
+    medianArray.append(round(statistics.median(afterQuantile), 2))
+
+    
 
 
 print(medianArray)
 
+
+objects = ["Celowniki, lunety", 
+"Części ASG",
+"Karabinki szturmowe",
+"Karabinki maszynowe",
+"Karabiny snajperskie",
+"Kulki ASG",
+"Magazynki",
+"Oporządzenie taktyczne",
+"Osprzęt ASG",
+"Pistolety i rewolwery",
+"Pistolety maszynowe" ,
+"Strzelby" ,
+"Pozostałe"
+]
+
+y_pos = np.arange(len(objects))
+performance = medianArray
+
+plt.barh(y_pos, performance, align='center', alpha=0.5)
+plt.yticks(y_pos, objects)
+plt.xlabel('Cena [zł]')
+plt.title('Mediana cen w rozrónieniu na kategorie', fontsize=14, fontweight='bold')
+
+for i, v in enumerate(performance):
+    plt.text(v + 5, i - 0.15, str(v), color='blue', fontsize=9, fontweight='bold')
+
+plt.show()
 
